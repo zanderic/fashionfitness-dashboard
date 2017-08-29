@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard f&f</title>
+    <link rel="shortcut icon" href="favicon-list-alt-black.ico" />
+    <meta name="description" content="Gestisci e modifica i dati da visualizzare nell'applicazione fashion&fitness">
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+	<link rel="manifest" href="favicons/manifest.json">
+	<link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#f4f4f4">
+	<meta name="theme-color" content="#ffffff">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<!-- Regular CSS -->
+	<link rel="stylesheet" href="css/stylesheet.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head> 
+<body>
+	<div class="container">
+		<img src="fashion&fitness_black.png" class="img-responsive" alt="logo">
+		<h1>Dashboard <small><i class="fa fa-list-alt" aria-hidden="true"></i> Gestisci e modifica i dati da visualizzare nell'applicazione</small>
+			<button class="btn btn-danger" id="logout" onclick="logout()">Esci <i class="fa fa-sign-out"></i></button>
+			<button class="btn btn-warning" data-toggle="modal" data-target="#account-modal"><i class="fa fa-user"></i> Account</button>
+		</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+			  		<div class="panel-heading">
+			    		<h3 class="panel-title pull-left">PROMOZIONI<span class="badge" id="badge-promo"></span></h3>
+			    		<button class="btn btn-default pull-right" data-toggle="modal" data-target="#promo-modal" data-type="new"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Nuovo</button>
+			  		</div>
+			  		<div class="panel-body">
+			  			<div id="alert-promo"></div>
+			  			<div class="panel-group" id="lista-promo" role="tablist" aria-multiselectable="true"></div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+			  		<div class="panel-heading">
+			    		<h3 class="panel-title pull-left">CORSI<span class="badge" id="badge-corsi"></span></h3>
+			    		<button class="btn btn-default pull-right" data-toggle="modal" data-target="#corso-modal" data-type="new"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Nuovo</button>
+			  		</div>
+			  		<div class="panel-body">
+			  			<div id="alert-corsi"></div>
+			  			<div class="panel-group" id="lista-corsi" role="tablist" aria-multiselectable="true"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				
+				<div class="panel panel-primary">
+			  		<div class="panel-heading">
+			    		<h3 class="panel-title pull-left">STAFF<span class="badge" id="badge-team"></span></h3>
+			    		<button class="btn btn-default pull-right" data-toggle="modal" data-target="#team-modal" data-type="new"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> Nuovo</button>
+			  		</div>
+			  		<div class="panel-body">
+			  			<div id="alert-team"></div>
+			  			<div class="panel-group" id="lista-trainer" role="tablist" aria-multiselectable="true"></div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+			  		<div class="panel-heading">
+			    		<h3 class="panel-title pull-left">CORSI PDF</h3>
+			    		<button class="btn btn-default pull-right" id="confirm-upload-pdf"><i class="fa fa-upload fa-lg" aria-hidden="true"></i> Carica</button>
+			  		</div>
+			  		<div class="panel-body">
+			  			<div id="alert-corsi-pdf"></div>
+			  			<div class="corsi-pdf">
+			  				<div class="form-inline">
+					  			<div class="form-group">
+									<label for="upload-corsi-pdf">Carica PDF</label>
+									<input type="file" id="upload-corsi-pdf" name="upload-corsi-pdf" >
+								</div>
+							</div>
+			  			</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- New/Edit corso modal -->
+		<div class="modal fade" id="corso-modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Crea Corso</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="row">
+								<div class="col-md-9">
+									<div class="form-group">
+										<label for="corso-name" class="control-label">Nome</label>
+				  						<input type="text" class="form-control" id="corso-name" aria-describedby="corso-name">
+			  						</div>
+		  						</div>
+		  						<div class="col-md-3">
+			  						<div class="checkbox checkbox-corso-new" data-toggle="tooltip" data-placement="top" title="Mostra etichetta">
+								    	<label><input id="corso-new" type="checkbox"> <strong>Nuovo</strong></label>
+								    </div>
+								</div>
+						    </div>
+		  					<div class="form-group">
+		  						<label for="corso-desc" class="control-label">Descrizione</label>
+		  						<textarea type="text" class="form-control" rows="3" id="corso-desc" aria-describedby="corso-desc"></textarea>
+							</div>
+							<div class="form-group">
+		  						<label for="corso-keywords" class="control-label">Keywords</label>
+		  						<input type="text" class="form-control" id="corso-keywords" aria-describedby="corso-keywords" placeholder="Digita la parola chiave e premi invio."></input>
+							</div>
+							<div class="form-group" id="temp-keywords"></div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+						<button type="button" class="btn btn-primary" id="confirm-action-corso">Crea</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- New personal trainer modal -->
+		<div class="modal fade" id="team-modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Crea Personal Trainer</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="trainer-name" class="control-label">Nome</label>
+		  						<input type="text" class="form-control" id="trainer-name" aria-describedby="trainer-name">
+		  					</div>
+		  					<div class="form-group">
+		  						<label for="trainer-desc" class="control-label">Descrizione</label>
+		  						<textarea type="text" class="form-control" rows="3" id="trainer-desc" aria-describedby="trainer-desc"></textarea>
+							</div>
+							<div class="form-group">
+		  						<label for="trainer-phone" class="control-label">Telefono</label>
+		  						<input type="tel" class="form-control" id="trainer-phone" aria-describedby="trainer-phone"></input>
+							</div>
+							<div class="form-group">
+		  						<label for="trainer-email" class="control-label">Email</label>
+		  						<input type="email" class="form-control" id="trainer-email" aria-describedby="trainer-email"></input>
+							</div>
+							<div class="form-inline">
+								<div class="form-group">
+									<label for="trainer-profile">Foto Profilo</label>
+									<input type="file" id="trainer-profile" name="trainer-profile">
+								</div>
+								<div class="form-group">
+									<label for="trainer-cover">Foto Copertina</label>
+									<input type="file" id="trainer-cover" name="trainer-cover">
+								</div>
+							</div>
+							<div class="alert-photo-team"></div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+						<button type="button" class="btn btn-primary" id="confirm-action-trainer">Crea</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- New promo modal -->
+		<div class="modal fade" id="promo-modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Crea Promozione</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="promo-name" class="control-label">Titolo</label>
+		  						<input type="text" class="form-control" id="promo-name" aria-describedby="promo-name">
+		  					</div>
+							<div class="form-inline">
+								<div class="form-group">
+			  						<label for="promo-image">Immagine</label>
+									<input type="file" id="promo-image" name="promo-image"> <!-- CONTROLLARE FOR - ID/NAME -->
+								</div>
+								<div class="checkbox" data-toggle="tooltip" data-placement="top" title="Rendila visibile nell'app">
+							    	<label>
+							    		<input id="promo-active" type="checkbox"> <strong>Attiva</strong>
+							    	</label>
+							    </div>
+							</div>
+							<div class="alert-photo-promo"></div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+						<button type="button" class="btn btn-primary" id="confirm-action-promo">Crea</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Confirm delete modal -->
+		<div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Vuoi davvero eliminare?</h4>
+					</div>
+					<div class="modal-body">
+						<p>Sei sicuro di voler eliminare questo corso?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+						<button type="button" class="btn btn-danger" id="confirm-action-delete" data-dismiss="modal">Elimina</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Edit credentials modal -->
+		<div class="modal fade" id="account-modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Nuove Credenziali</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="new-username" class="control-label">Username</label>
+		  						<input type="text" class="form-control" id="new-username" aria-describedby="new-username">
+		  					</div>
+		  					<div class="form-group">
+		  						<label for="new-password" class="control-label">Password</label>
+		  						<input type="password" class="form-control" id="new-password" aria-describedby="new-password"></input>
+							</div>
+							<div class="form-group">
+		  						<label for="new-password-confirm" class="control-label">Ripeti password</label>
+		  						<input type="password" class="form-control" id="new-password-confirm" aria-describedby="new-password-confirm"></input>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="resetPassword()">Reset</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+						<button type="button" class="btn btn-primary" id="change-credentials">Cambia</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap Sticky Footer -->
+	<footer class="footer">
+		<div class="container">
+			<p class="text-muted pull-right">Powered with <i class="fa fa-coffee" aria-hidden="true"></i> by <a href="https://www.linkedin.com/in/riccardozandegiacomodelugan/" target="_blank">zanderic</a></p>
+		</div>
+	</footer>
+
+	<!-- jQuery -->
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- Lovefield -->
+	<script type="text/javascript" src="bower_components/lovefield/dist/lovefield.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"/></script>
+	<!-- Script Utils -->
+	<script type="text/javascript" src="js/utils.js"></script>
+	<!-- Script Corsi -->
+	<script type="text/javascript" src="js/corsi.js"></script>
+	<!-- Script Team -->
+	<script type="text/javascript" src="js/team.js"></script>
+	<!-- Script Promo -->
+	<script type="text/javascript" src="js/promo.js"></script>
+</body>
+</html>
