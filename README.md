@@ -6,6 +6,4 @@ Web Dashboard per la gestione dei contenuti dell'applicazione fashion&fitness.
 L'utilizzo della dashboard è protetto tramite credenziali d'accesso, salvate e gestite tramite Lovefield, un database relazionale sviluppato appositamente per applicazioni web. Di default lo username e la password sono entrambe "admin", ma è caldamente consigliato cambiarli per una sicurezza maggiore.
 
 ## Gestione dei dati
-La gestione dei dati è resa possibile grazie a delle chiamate Ajax asincrone, che vanno a modificare i file corsi.json e personale.json caricati sul server.
-
-**N.B: il progetto è gestito interamente con bower, la quale cartella bower_components è assente.**
+La gestione dei dati è resa possibile grazie a delle chiamate Ajax asincrone, che vanno a modificare i file corsi.json, team.json e promo.json caricati sul server.
