@@ -23,8 +23,8 @@ schemaBuilder.connect().then(function(db) {
 	var account = db.getSchema().table('login');
 	var row = account.createRow({
 		'id': 1,
-		'username': 'admin',
-		'password': 'admin',
+		'username': 'dashboard',
+		'password': 'riccardoZandegiacomoFF',
 		'active': false
 	});
 	// .insert / .insertOrReplace: .insert will operate only if there not exists a row with PK = 1.
