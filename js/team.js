@@ -92,7 +92,7 @@ $(document).ready(function() {
  * Array Team declaration and creation of the datasbase schema
  */
 var team = [];
-var server = "http://www.auronzovacanze.com/dashboard/";
+var server = "http://www.fashionfitness.it/dashboard/";
 
 /**
  * Get team list from file team.json on server and run displayTeam()

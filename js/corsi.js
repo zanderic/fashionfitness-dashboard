@@ -163,7 +163,7 @@ $(document).ready(function() {
  * Array Corsi declaration and server link
  */
 var corsi = [];
-var server = "http://www.auronzovacanze.com/dashboard/";
+var server = "http://www.fashionfitness.it/dashboard/";
 
 /**
  * Get corsi list from file corsi.json on server and run displayCorsi()

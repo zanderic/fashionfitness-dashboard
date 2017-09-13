@@ -61,7 +61,7 @@ $(document).ready(function() {
  * Array promo declaration and creation of the datasbase schema
  */
 var promozioni = [];
-var server = "http://www.auronzovacanze.com/dashboard/";
+var server = "http://www.fashionfitness.it/dashboard/";
 
 /**
  * Get promozioni list from file promo.json on server and run displayPromo()
