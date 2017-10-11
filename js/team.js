@@ -287,8 +287,6 @@ function updateTeam(team) {
  */
 function deleteTrainer(index) {
 	console.log("deleteTrainer()");
-	console.log(index);
-	console.log(team);
 	var profile = team[index].profile.replace(server + 'data/', ''); 
 	var cover = team[index].cover.replace(server + 'data/', '');
 

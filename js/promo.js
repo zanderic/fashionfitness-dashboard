@@ -99,7 +99,6 @@ function displayPromo() {
 	$("#badge-promo").text(promozioni.length);
 	$("#lista-promo").empty();
 	for (var i = 0; i < promozioni.length; i++) {
-		console.log(promozioni[i]);
 		// Badge new corso definition
 		var badge = '<span class="badge badge-text">Attiva</span>';
 		var deActivateButton = '<a role="button" class="btn btn-warning" onclick="deActivatePromo(' + i + ')"><i class="fa fa-ban fa-lg"></i> Disattiva</a>';
