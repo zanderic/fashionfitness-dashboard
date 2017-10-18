@@ -78,7 +78,7 @@ $(document).ready(function() {
 				deleteScheda(number, false); // Won't call updateSchede(schede)
 				schede[number].link = link;
 				updateSchedaPDF(pdf); // Will call updateSchede(schede)
-			} else {
+			} else if (pdf == undefined) {
 				updateSchede(schede); // Just update schede array and upload it
 			}
 		} else {
@@ -126,8 +126,7 @@ $(document).ready(function() {
 			if (!checkPdf(pdf)) {
 				$("#scheda-image").parent(".form-group").addClass("has-error has-feedback");
 				$("#scheda-image").parent(".form-group").append('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>' +
-  					'<span class="sr-only">(error)</span>' +
-  					'<span class="help-block">Il caricamento del file non è andato a buon fine.</span>');	
+  					'<span class="sr-only">(error)</span>');
 			} else {
 				$("#scheda-image").parent(".form-group").addClass("has-success has-feedback");
 				$("#scheda-image").parent(".form-group").append('<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>' +
@@ -168,37 +167,14 @@ $(document).ready(function() {
 	    	}
 		}
 	});
-
-						/**
-						 * Define behaviour of confirm button of upload corsi PDF. It check the file and manage errors.
-						 */
-						$("#confirm-upload-pdf").click(function() {
-							var buttonText = $(this).text().trim();
-							if (buttonText == "Cancella") {
-								$('button#confirm-upload-pdf').html('<i class="fa fa-upload fa-lg" aria-hidden="true"></i> Carica');
-								$('.corsi-pdf').html('<div class="form-inline"><div class="form-group"><label for="upload-corsi-pdf">caricamento PDF</label>' +
-									'<input type="file" id="upload-corsi-pdf" name="upload-corsi-pdf"></div></div>');
-							} else {
-								resetErrors();
-								var pdf = document.getElementById("upload-corsi-pdf").files[0];
-								if (pdf != undefined && checkPdf(pdf)) {
-									updateCorsiPDF(pdf);
-								} else if (pdf == undefined) {
-									$("#upload-corsi-pdf").parent(".form-group").addClass("has-error has-feedback");
-										$("#upload-corsi-pdf").parent(".form-group").append('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>' +
-						  					'<span class="sr-only">(error)</span>' + 
-						  					'<span class="help-block">Inserire un file in formato PDF.</span>');
-								}
-							}
-						});
 });
 
 /**
  * Array Corsi declaration and server link
  */
 var schede = [];
-// var server = "http://www.fashionfitness.it/dashboard/";
-var server = "http://www.auronzovacanze.com/dashboard/";
+var server = "http://www.fashionfitness.it/dashboard/";
+// var server = "http://www.auronzovacanze.com/dashboard/";
 
 /**
  * Get schede list from file schede.json on server and run displaySchede()
@@ -435,7 +411,6 @@ function checkPdf(pdf) {
 	}
 	// Error?
 	if (!uploadOk) {
-		error = error + "Il caricamento non è andato a buon fine!";
 		$("#alert-image-scheda").append('<div class="alert alert-danger alert-dismissable fade in">' + 
 			'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' + error +
 			'</div>');
