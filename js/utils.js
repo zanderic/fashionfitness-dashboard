@@ -184,6 +184,7 @@ function resetErrors() {
 		$("div.has-warning").children("span.help-block").remove();
 		$("div.has-warning").removeClass("has-warning has-feedback");
 	}
+	$("div#alert-image-scheda").html("");
 }
 
 /**
