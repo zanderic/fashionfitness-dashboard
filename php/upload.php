@@ -51,7 +51,7 @@
 	}
 
 	if (isset($_FILES["corsi_pdf"])) {
-		echo("CORSI-PDF");
+		echo("PDF");
 		$target_pdf = $target_dir . "corsi.pdf";
 
 		// Check if file already exists
@@ -62,24 +62,6 @@
 		// Uploading files
 		if (move_uploaded_file($_FILES["corsi_pdf"]["tmp_name"], $target_pdf)) {
 		    echo "The file ". basename( $_FILES["corsi_pdf"]["name"]). " has been uploaded." . "\n";
-		} else {
-		    echo "Sorry, there was an error uploading your file." . "\n";
-		}
-	}
-
-	if (isset($_FILES["scheda_pdf"])) {
-		echo("SCHEDA-PDF");
-		$trim_name = strtolower(str_replace(" ", "", $_FILES["scheda_pdf"]["name"]));
-		$target_pdf = $target_dir . basename($trim_name);
-
-		// Check if file already exists
-		if (file_exists($target_pdf)) {
-		    echo "Sorry, profile already exists. It will be replaced." . "\n";
-		    unlink($target_pdf);
-		}
-		// Uploading files
-		if (move_uploaded_file($_FILES["scheda_pdf"]["tmp_name"], $target_pdf)) {
-		    echo "The file ". basename($trim_name). " has been uploaded." . "\n";
 		} else {
 		    echo "Sorry, there was an error uploading your file." . "\n";
 		}

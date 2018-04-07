@@ -84,9 +84,6 @@ $(document).ready(function() {
 			case "promo":
 				modal.find("#confirm-action-delete").attr("onclick", "deletePromo(" + button.data('index') + ")");
 				break;
-			case "scheda":
-				modal.find("#confirm-action-delete").attr("onclick", "deleteScheda(" + button.data('index') + ", true)");
-				break;
 		}
 	});
 });
@@ -119,7 +116,6 @@ function isLogged() {
 			getCorsiPDF();
 			getTeam();
 			getPromo();
-			getSchede();
 		}
 		results.forEach(function(row) {
 			alert("Ci hai provato... Accesso negato!");
@@ -184,7 +180,6 @@ function resetErrors() {
 		$("div.has-warning").children("span.help-block").remove();
 		$("div.has-warning").removeClass("has-warning has-feedback");
 	}
-	$("div#alert-image-scheda").html("");
 }
 
 /**
@@ -213,10 +208,6 @@ function showMessage(context) {
 		case "reset":
 			message = "Reset delle <strong>credenziali d'accesso</strong> eseguito correttamente!";
 			pointer = "#alert-corsi";
-			break;
-		case "scheda":
-			message = "Elenco delle schede d'allenamento aggiornato!";
-			pointer = "#alert-schede";
 			break;	
 	}
 	if ($(pointer + " .alert").length == 0 ) {
