@@ -164,6 +164,7 @@ $(document).ready(function() {
  */
 var corsi = [];
 var server = "http://www.fashionfitness.it/dashboard/";
+// var server = "http://www.auronzovacanze.com/dashboard/";
 
 /**
  * Get corsi list from file corsi.json on server and run displayCorsi()
@@ -355,7 +356,7 @@ function updateCorsiPDF(pdf) {
  * Check pdf restrinctions.
  * Limitations:
  * - Only pdf extensions
- * - Maximum size 0,5 Mb
+ * - Maximum size 0,5 Mb -> extended 2MB (07/04/18)
  */
 function checkPdf(pdf) {
 	console.log("checkPdf()");
@@ -370,9 +371,9 @@ function checkPdf(pdf) {
 		error = error + "Il file selezionato non è un pdf.<br>";
 	}
 	// Size check
-	if (pdfSize > 500000) {
+	if (pdfSize > 2000000) {
 		uploadOk = false;
-		error = error + "Il file selezionato è troppo pesante. Il limite supportato è di 500 KB.<br>" + '\n';
+		error = error + "Il file selezionato è troppo pesante. Il limite supportato è di 2 MB.<br>" + '\n';
 	}
 	// Error?
 	if (!uploadOk) {
