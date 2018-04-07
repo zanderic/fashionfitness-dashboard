@@ -93,7 +93,6 @@ $(document).ready(function() {
  */
 var team = [];
 var server = "http://www.fashionfitness.it/dashboard/";
-// var server = "http://www.auronzovacanze.com/dashboard/";
 
 /**
  * Get team list from file team.json on server and run displayTeam()
@@ -166,7 +165,7 @@ function displayTeam() {
  * Check image restrinctions.
  * Limitations:
  * - Only jpg, jpeg and png extensions
- * - Maximum size 500k -> extended to 2MB (07/04/18)
+ * - Maximum size 500k
  * - Name must be unique. The server will replace old file with the same name
  */
 function checkImageTeam(profile, cover) {
@@ -189,13 +188,13 @@ function checkImageTeam(profile, cover) {
 		error = error + "Il file selezionato per la cover non è un'immagine.<br>";
 	}
 	// Size check
-	if (profileSize > 2000000) {
+	if (profileSize > 500000) {
 		uploadOk = false;
-		error = error + "Il file selezionato per il profilo è troppo pesante. Il limite supportato è di 2 MB.<br>";
+		error = error + "Il file selezionato per il profilo è troppo pesante. Il limite supportato è di 500 KB.<br>";
 	}
-	if (coverSize > 2000000) {
+	if (coverSize > 500000) {
 		uploadOk = false;
-		error = error + "Il file selezionato per la cover è troppo pesante. Il limite supportato è di 2 MB.<br>";
+		error = error + "Il file selezionato per la cover è troppo pesante. Il limite supportato è di 500 KB.<br>";
 	}
 	// Name check - it cannot be already in use, otherwise it will be deleted by the server
 	for (var i = 0; i < team.length; i++) {
@@ -288,6 +287,8 @@ function updateTeam(team) {
  */
 function deleteTrainer(index) {
 	console.log("deleteTrainer()");
+	console.log(index);
+	console.log(team);
 	var profile = team[index].profile.replace(server + 'data/', ''); 
 	var cover = team[index].cover.replace(server + 'data/', '');
 
