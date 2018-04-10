@@ -103,16 +103,9 @@ function displayPromo() {
 		// Badge new corso definition
 		var badge = '<span class="badge badge-text">Attiva</span>';
 		var deActivateButton = '<a role="button" class="btn btn-warning" onclick="deActivatePromo(' + i + ')"><i class="fa fa-ban fa-lg"></i> Disattiva</a>';
-		var lastThree = promozioni[i].image.substr(promozioni[i].image.length - 3);
 		if (!promozioni[i].active) {
 			badge = '';
 			deActivateButton = '<a role="button" class="btn btn-success" onclick="deActivatePromo(' + i + ')"><i class="fa fa-check fa-lg" aria-hidden="true"></i> Attiva</a>';
-		}
-		// Check if is pdf or jpg/png, there is a different visualization
-		if (lastThree.toLowerCase() == "pdf") {
-			var media = '<a href="' + promozioni[i].image + '" target="_blank" class="btn btn-primary btn-block link-promo" role="button">Visualizza Promo</a>';
-		} else {
-			var media = '<img class="img-thumbnail img-promo" src="' + promozioni[i].image + '" alt="image-promo">';
 		}
 		// Append a new promo panel in the list
 		$("#lista-promo").append('<div class="panel panel-default">' + 
@@ -125,7 +118,9 @@ function displayPromo() {
 		    '</div>' +
 		    '<div id="promo-content' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="promo-heading' + i + '">' +
 		    	'<div class="panel-body">' +
-					media +
+					'<div class="row text-center">' +
+						'<img class="img-thumbnail img-promo" src="' + promozioni[i].image + '" alt="image-promo">' +
+					'</div>' +
 		    		'<div class="btn-group pull-right" role="group" aria-label="activate-deactivate">' +
 		    			deActivateButton +
 		    			'<a role="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete-modal" data-index="' + i + '" data-name="' + promozioni[i].name + '"' + 
@@ -141,7 +136,7 @@ function displayPromo() {
 /**
  * Check image restrinctions.
  * Limitations:
- * - Only jpg, jpeg and png extensions -> extended to pdf (07/04/18)
+ * - Only jpg, jpeg and png extensions
  * - Maximum size 500k -> extended to 2MB (07/04/18)
  * - Name must be unique. The server will replace old file with the same name
  */
@@ -156,9 +151,9 @@ function checkImagePromo(image) {
 	var error = "";
 	var uploadOk = true;
 	// Extension check
-	if (imageType != "image/png" && imageType != "image/jpeg" && imageType != "application/pdf") {
+	if (imageType != "image/png" && imageType != "image/jpeg") {
 		uploadOk = false;
-		error = error + "Il file selezionato non è un'immagine o un pdf.<br>";
+		error = error + "Il file selezionato non è un'immagine.<br>";
 	}
 	// Size check
 	if (imageSize > 2000000) {
@@ -182,7 +177,6 @@ function checkImagePromo(image) {
 	}
 	console.log(uploadOk);
 	return uploadOk;
-
 }
 
 /**
